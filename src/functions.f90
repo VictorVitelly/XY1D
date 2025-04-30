@@ -17,20 +17,6 @@ contains
     end if
   end function iv
 
-  function ip2(i)
-    integer(i4), intent(in) :: i
-    integer(i4) :: ip2
-    if(i==L+1) then
-      ip2=1
-    else if(i==L+2) then
-      ip2=2
-    else if(i==0) then
-      ip2=L
-    else
-      ip2=i
-    end if
-  end function ip2
-
   function Hamilt(Sx,Sy)
     real(dp), dimension(:), intent(in) :: Sx,Sy
     real(dp) :: Hamilt
@@ -75,6 +61,19 @@ contains
     end do
     Magnet2=(a**2+b**2)/real(Narr,dp)
   end function Magnet2
+
+  function top_charge(Sx,Sy)
+    real(dp), dimension(L), intent(in) :: Sx,Sy
+    real(dp), dimension(L) :: phi(:)
+    real(dp) :: dphi
+    integer(i4) :: i
+    do i=1,L
+      phi(i)=atan2(Sy(i),Sx(i))
+    end do
+    do i=1,L
+      dphi=dphi+phi(iv(i+1))-phi(i)
+    end do
+  end function top_charge
 
 
 end module functions
