@@ -1,0 +1,83 @@
+module functions
+    use iso_fortran_env, only : dp => real64, i4 => int32
+    use parameters
+    implicit none
+
+contains
+
+  function iv(i)
+    integer(i4), intent(in) :: i
+    integer(i4) :: iv
+    if(i==L+1) then
+      iv=1
+    else if(i==0) then
+      iv=L
+    else
+      iv=i
+    end if
+  end function iv
+
+  function ip2(i)
+    integer(i4), intent(in) :: i
+    integer(i4) :: ip2
+    if(i==L+1) then
+      ip2=1
+    else if(i==L+2) then
+      ip2=2
+    else if(i==0) then
+      ip2=L
+    else
+      ip2=i
+    end if
+  end function ip2
+
+  function Hamilt(T,Sx,Sy)
+    real(dp), intent(in) :: T
+    real(dp), dimension(:), intent(in) :: Sx,Sy
+    real(dp) :: Hamilt
+    integer(i4) :: i,Narr
+    Narr=size(Sx)
+    Hamilt=0._dp
+    do i=1,Narr
+      Hamilt=Hamilt-Sx(i)*Sx(iv(i+1) )-Sy(i)*Sy(iv(i+1) )
+    end do
+    Hamilt=Hamilt/T
+  end function Hamilt
+
+  function DeltaE(T,Sx,Sy,i,Sx2,Sy2)
+    real(dp), intent(in) :: T
+    real(dp), dimension(:), intent(in) :: Sx,Sy
+    integer(i4), intent(in) :: i
+    real(dp), intent(in) :: Sx2,Sy2
+    real(dp) :: DeltaEx,DeltaEy,DeltaE
+      DeltaEx=(Sx(iv(i+1) )+Sx(iv(i-1) ) )*(Sx(i)-Sx2 )
+      DeltaEy=(Sy(iv(i+1) )+Sy(iv(i-1) ) )*(Sy(i)-Sy2 )
+      DeltaE=(DeltaEx+DeltaEy)/T
+  end function DeltaE
+
+  function Deltah(T,Sx,Sy,i,Sx2,Sy2)
+    real(dp), intent(in) :: T
+    real(dp), dimension(:), intent(in) :: Sx,Sy
+    integer(i4), intent(in) :: i
+    real(dp), intent(in) :: Sx2,Sy2
+    real(dp) :: Deltah
+    Deltah=(Sx(i)*(Sx(iv(i+1))-Sx2 )+Sy(i)*(Sy(iv(i+1))-Sy2 ) )/T
+  end function Deltah
+
+  function Magnet2(Sx,Sy)
+    real(dp), dimension(:), intent(in) :: Sx,Sy
+    real(dp) :: Magnet2,a,b
+    integer(i4) :: i,Narr
+    Narr=size(Sx)
+    Magnet2=0._dp
+    a=0._dp
+    b=0._dp
+    do i=1,Narr
+      a=a+Sx(i)
+      b=b+Sy(i)
+    end do
+    Magnet2=(a**2+b**2)/real(Narr,dp)
+  end function Magnet2
+
+
+end module functions
