@@ -31,8 +31,7 @@ contains
     end if
   end function ip2
 
-  function Hamilt(T,Sx,Sy)
-    real(dp), intent(in) :: T
+  function Hamilt(Sx,Sy)
     real(dp), dimension(:), intent(in) :: Sx,Sy
     real(dp) :: Hamilt
     integer(i4) :: i,Narr
@@ -41,27 +40,25 @@ contains
     do i=1,Narr
       Hamilt=Hamilt-Sx(i)*Sx(iv(i+1) )-Sy(i)*Sy(iv(i+1) )
     end do
-    Hamilt=Hamilt/T
+    Hamilt=Hamilt
   end function Hamilt
 
-  function DeltaE(T,Sx,Sy,i,Sx2,Sy2)
-    real(dp), intent(in) :: T
+  function DeltaE(Sx,Sy,i,Sx2,Sy2)
     real(dp), dimension(:), intent(in) :: Sx,Sy
     integer(i4), intent(in) :: i
     real(dp), intent(in) :: Sx2,Sy2
     real(dp) :: DeltaEx,DeltaEy,DeltaE
       DeltaEx=(Sx(iv(i+1) )+Sx(iv(i-1) ) )*(Sx(i)-Sx2 )
       DeltaEy=(Sy(iv(i+1) )+Sy(iv(i-1) ) )*(Sy(i)-Sy2 )
-      DeltaE=(DeltaEx+DeltaEy)/T
+      DeltaE=(DeltaEx+DeltaEy)
   end function DeltaE
 
-  function Deltah(T,Sx,Sy,i,Sx2,Sy2)
-    real(dp), intent(in) :: T
+  function Deltah(Sx,Sy,i,Sx2,Sy2)
     real(dp), dimension(:), intent(in) :: Sx,Sy
     integer(i4), intent(in) :: i
     real(dp), intent(in) :: Sx2,Sy2
     real(dp) :: Deltah
-    Deltah=(Sx(i)*(Sx(iv(i+1))-Sx2 )+Sy(i)*(Sy(iv(i+1))-Sy2 ) )/T
+    Deltah=(Sx(i)*(Sx(iv(i+1))-Sx2 )+Sy(i)*(Sy(iv(i+1))-Sy2 ) )
   end function Deltah
 
   function Magnet2(Sx,Sy)

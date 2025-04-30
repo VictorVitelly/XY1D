@@ -49,7 +49,7 @@ contains
       b=sin(theta)*Sx(i)+cos(theta)*Sy(i)
       Sx2=a/(a**2+b**2)
       Sy2=b/(a**2+b**2)
-      DE=DeltaE(T,Sx,Sy,i,Sx2,Sy2)
+      DE=DeltaE(Sx,Sy,i,Sx2,Sy2)
       if(DE.le.0._dp) then
         Sx(i)=Sx2
         Sy(i)=Sy2
@@ -57,7 +57,7 @@ contains
         AR_N=AR_N+1
       else
         call random_number(r)
-        p=Exp(-DE)
+        p=Exp(-DE/T)
         AR=AR+p
         AR_N=AR_N+1
         if(r<p) then
@@ -71,30 +71,21 @@ contains
 
   subroutine Cluster(T,Sx,Sy)
     real(dp), intent(in) :: T
-    real(dp), dimension(:), intent(inout) :: Sx,Sy
+    real(dp), dimension(L), intent(inout) :: Sx,Sy
     real(dp) rx,ry,theta,r,dh,p,p2
-    real(dp), allocatable :: Sx2(:),Sy2(:)
-    integer(i4) :: i,j,Narr,k1,k2
-    integer(i4), allocatable :: bond(:),clusterL(:),clusterR(:),clusterRaux(:)
-    Narr=size(Sx)
-    allocate(bond(Narr))
-    allocate(Sx2(Narr))
-    allocate(Sy2(Narr))
-    allocate(clusterL(Narr))
-    allocate(clusterR(Narr))
-    allocate(clusterRaux(Narr))
+    real(dp) :: Sx2(L),Sy2(L)
+    integer(i4) :: i,j,k1,k2
+    integer(i4) :: bond(L),clusterL(L),clusterR(L),clusterRaux(L)
     call random_real(theta,Pi)
     rx=cos(theta)
     ry=sin(theta)
     bond=0
-    do i=1,Narr
+    do i=1,L
       Sx2(i)=Sx(i)-2._dp*rx*(Sx(i)*rx+Sy(i)*ry )
       Sy2(i)=Sy(i)-2._dp*ry*(Sx(i)*rx+Sy(i)*ry )
-      !Sx2(i)=Sx2(i)/(Sx2(i)**2+Sy2(i)**2)
-      !Sy2(i)=Sy2(i)/(Sx2(i)**2+Sy2(i)**2)
     end do
-    do i=1,Narr
-      dh=Deltah(T,Sx,Sy,i,Sx2(iv(i+1)),Sy2(iv(i+1)))
+    do i=1,L
+      dh=Deltah(Sx,Sy,i,Sx2(iv(i+1)),Sy2(iv(i+1)))
       if(dh > 0) then
         call random_number(r)
         p=1._dp-Exp(-dh/T)
@@ -103,66 +94,118 @@ contains
         end if
       end if
     end do
-    k1=0
-    k2=0
-    do i=1,Narr
-      if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
-        k1=k1+1
-        clusterL(k1)=i
-      end if
-      if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
-        k2=k2+1
-        clusterR(k2)=i
-      end if
-    end do
-    if(k1.ne.k2) then
-      write(*,*) "WARNING!"
-    end if
-    if(clusterL(1)>clusterR(1) ) then
-      do i=1,k2-1
-        clusterRaux(i)=clusterR(iv(i+1) )
+    if(bond(L)==0) then
+      k1=0
+      k2=0
+      do i=1,L
+        if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
+          k1=k1+1
+          clusterL(k1)=i
+        end if
+        if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
+          k2=k2+1
+          clusterR(k2)=i+1
+        end if
       end do
-      clusterRaux(k2)=clusterR(1)
-      clusterR(:)=0._dp
-      clusterR(:)=clusterRaux(:)
-    end if
-    do i=1,k1
-      call random_number(p2)
-      if(p2<0.5_dp) then
-        do j=clusterL(i),clusterR(i)
-          Sx(j)=Sx2(j)/(Sx2(j)**2 +Sy2(j)**2 )
-          Sy(j)=Sy2(j)/(Sx2(j)**2 +Sy2(j)**2 )
+      do i=1,L
+        if(bond(i)==0 .and. bond(iv(i-1))==0 ) then
+          k1=k1+1
+          clusterL(k1)=i
+          clusterR(k1)=i
+        end if
+      end do
+      if(clusterL(1)>clusterR(1) ) then
+        do i=1,k2-1
+          clusterRaux(i)=clusterR(i+1)
+        end do
+        clusterRaux(k2)=clusterR(1)
+        do i=1,k2
+          clusterR(i)=clusterRaux(i)
         end do
       end if
-    end do
-    deallocate(bond,Sx2,Sy2,clusterL,clusterR,clusterRaux)
-  end subroutine Cluster
+      do i=1,k1
+        call random_number(p2)
+        if(p2<0.5_dp) then
+          do j=clusterL(i),clusterR(i)
+            Sx(j)=Sx2(j)
+            Sy(j)=Sy2(j)
+          end do
+        end if
+      end do
+    end if
 
+    if(bond(L)==1) then
+      k1=1
+      k2=1
+      do i=1,L
+        if(bond(i)==0) then
+          clusterR(1)=i
+          exit
+        end if
+      end do
+      do i=1,L
+        if(bond(iv(L-i))==0) then
+          clusterL(1)=L-i+1
+          exit
+        end if
+      end do
+      do i=clusterR(1),iv(ClusterL(1)-1)
+        if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
+          k1=k1+1
+          clusterL(k1)=i
+        end if
+        if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
+          k2=k2+1
+          clusterR(k2)=iv(i+1)
+        end if
+      end do
+      do i=2,L-1
+        if(bond(i)==0 .and. bond(i-1)==0 ) then
+          k1=k1+1
+          clusterL(k1)=i
+          clusterR(k1)=i
+        end if
+      end do
+      call random_number(p2)
+      if(p2<0.5_dp) then
+        do i=clusterL(1),L
+          Sx(i)=Sx2(i)
+          Sy(i)=Sy2(i)
+        end do
+        do i=1,clusterR(1)
+          Sx(i)=Sx2(i)
+          Sy(i)=Sy2(i)
+        end do
+      end if
+      do i=2,k1
+        call random_number(p2)
+        if(p2<0.5_dp) then
+          do j=clusterL(i),clusterR(i)
+            Sx(j)=Sx2(j)
+            Sy(j)=Sy2(j)
+          end do
+        end if
+      end do
+    end if
+  end subroutine Cluster
 
   subroutine Clustert(T,Sx,Sy)
     real(dp), intent(in) :: T
-    real(dp), dimension(:), intent(inout) :: Sx,Sy
-    real(dp) rx,ry,theta,r,dh,p
-    real(dp), allocatable :: Sx2(:),Sy2(:)
-    integer(i4) :: i,j,Narr,k1,k2
-    integer(i4), allocatable :: bond(:),clusterL(:),clusterR(:),clusterRaux(:)
-    Narr=size(Sx)
-    allocate(bond(Narr))
-    allocate(Sx2(Narr))
-    allocate(Sy2(Narr))
-    allocate(clusterL(Narr))
-    allocate(clusterR(Narr))
-    allocate(clusterRaux(Narr))
+    real(dp), dimension(L), intent(inout) :: Sx,Sy
+    real(dp) rx,ry,theta,r,dh,p,p2
+    real(dp) :: Sx2(L),Sy2(L)
+    integer(i4) :: i,j,k1,k2
+    integer(i4) :: bond(L),clusterL(L),clusterR(L),clusterRaux(L)
     call random_real(theta,Pi)
     rx=cos(theta)
     ry=sin(theta)
     bond=0
-    do i=1,Narr
+    do i=1,L
       Sx2(i)=Sx(i)-2._dp*rx*(Sx(i)*rx+Sy(i)*ry )
       Sy2(i)=Sy(i)-2._dp*ry*(Sx(i)*rx+Sy(i)*ry )
     end do
-    do i=1,Narr
-      dh=Deltah(T,Sx,Sy,i,Sx2(iv(i+1)),Sy2(iv(i+1)))
+    do i=1,L
+      dh=Deltah(Sx,Sy,i,Sx2(iv(i+1)),Sy2(iv(i+1)))
       if(dh > 0) then
         call random_number(r)
         p=1._dp-Exp(-dh/T)
@@ -172,50 +215,109 @@ contains
       end if
     end do
     write(*,*) "bound=", bond
-    k1=0
-    k2=0
-    do i=1,Narr
-      if(bond(i)==0 ) then
-        k1=k1+1
-        clusterL(k1)=i
-        clusterR(k1)=i
-      else if(bond(i)==1) then
-        if(bond(iv(i-1))==0) then
+    if(bond(L)==0) then
+      k1=0
+      k2=0
+      do i=1,L
+        if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
+          k1=k1+1
           clusterL(k1)=i
         end if
-      end if
-      if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
-        k1=k1+1
-        clusterL(k1)=i
-      end if
-      if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
-        k2=k2+1
-        clusterR(k2)=i
-      end if
-    end do
-    if(k1.ne.k2) then
-      write(*,*) "WARNING!"
-    end if
-    if(clusterL(1)>clusterR(1) ) then
-      do i=1,k2-1
-        clusterRaux(i)=clusterR(iv(i+1) )
+        if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
+          k2=k2+1
+          clusterR(k2)=i+1
+        end if
       end do
-      clusterRaux(k2)=clusterR(1)
-      clusterR(:)=0._dp
-      clusterR(:)=clusterRaux(:)
-    end if
-    do i=1,k1
-      if(clusterL(1).le. clusterR(1) ) then
-        write(*,*) clusterL(i),clusterR(i)
-        do j=clusterL(i),clusterR(i)
-          Sx(iv(j+1) )=Sx2(iv(j+1) )
-          Sy(iv(j+1) )=Sy2(iv(j+1) )
-        end do
-      else
-        write(*,*) "Wtf?"
+      if(k1.ne.k2) then
+        write(*,*) "WARNING HERE!"
       end if
-    end do
-    deallocate(bond,Sx2,Sy2,clusterL,clusterR,clusterRaux)
+      do i=1,L
+        if(bond(i)==0 .and. bond(iv(i-1))==0 ) then
+          k1=k1+1
+          clusterL(k1)=i
+          clusterR(k1)=i
+        end if
+      end do
+      if(clusterL(1)>clusterR(1) ) then
+        do i=1,k2-1
+          clusterRaux(i)=clusterR(i+1)
+        end do
+        clusterRaux(k2)=clusterR(1)
+        do i=1,k2
+          clusterR(i)=clusterRaux(i)
+        end do
+      end if
+      do i=1,k1
+        write(*,*) clusterL(i),clusterR(i)
+        call random_number(p2)
+        if(p2<0.5_dp) then
+          do j=clusterL(i),clusterR(i)
+            Sx(j)=Sx2(j)
+            Sy(j)=Sy2(j)
+          end do
+        end if
+      end do
+    end if
+
+    if(bond(L)==1) then
+      k1=1
+      k2=1
+      do i=1,L
+        if(bond(i)==0) then
+          clusterR(1)=i
+          exit
+        end if
+      end do
+      do i=1,L
+        if(bond(iv(L-i))==0) then
+          clusterL(1)=L-i+1
+          exit
+        end if
+      end do
+      write(*,*) "Aqui",clusterL(1),clusterR(1)
+      do i=clusterR(1),iv(ClusterL(1)-1)
+        if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
+          k1=k1+1
+          clusterL(k1)=i
+        end if
+        if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
+          k2=k2+1
+          clusterR(k2)=iv(i+1)
+        end if
+      end do
+      if(k1.ne.k2) then
+        write(*,*) "WARNING SHIT!"
+      end if
+      do i=2,L-1
+        if(bond(i)==0 .and. bond(i-1)==0 ) then
+          k1=k1+1
+          clusterL(k1)=i
+          clusterR(k1)=i
+        end if
+      end do
+      call random_number(p2)
+      write(*,*) "Aqui otra vez",clusterL(1),clusterR(1)
+      if(p2<0.5_dp) then
+        do i=clusterL(1),L
+          Sx(i)=Sx2(i)
+          Sy(i)=Sy2(i)
+        end do
+        do i=1,clusterR(1)
+          Sx(i)=Sx2(i)
+          Sy(i)=Sy2(i)
+        end do
+      end if
+      do i=2,k1
+        write(*,*) clusterL(i),clusterR(i)
+        call random_number(p2)
+        if(p2<0.5_dp) then
+          do j=clusterL(i),clusterR(i)
+            Sx(j)=Sx2(j)
+            Sy(j)=Sy2(j)
+          end do
+        end if
+      end do
+    end if
   end subroutine Clustert
 
    subroutine mean_0(x,y)

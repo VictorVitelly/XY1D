@@ -6,9 +6,9 @@ program main
   use statistics
   implicit none
 
-  !call thermalize(0.5_dp)
+  call thermalize(0.5_dp)
   !call vary_temp(0.1_dp,1._dp,30)
-  call test(0.5_dp)
+  !call test(0.5_dp)
 
 contains
 
@@ -22,17 +22,18 @@ contains
       allocate(Sx(L) )
       allocate(Sy(L))
       allocate(ARtot(Nmsrs))
-      !call hot_start(Sx,Sy)
-      call cold_start(Sx,Sy)
+      call hot_start(Sx,Sy)
+      !call cold_start(Sx,Sy)
       k=0
       AR=0._dp
-      do i=1,2*thermalization
-        if(i==1 .or. mod(i,eachsweep)==0 ) then
-          write(10,*) i, Hamilt(T,Sx,Sy)/real(L,dp)
+      do i=1,thermalization
+        if(i==1 .or. mod(i,1)==0 ) then
+          write(10,*) i, Hamilt(Sx,Sy)/real(L,dp)
         end if
-        !call Metropolis(T,Sx,Sy,AR)
-        call Cluster(T,Sx,Sy)
+        call Metropolis(T,Sx,Sy,AR)
+        !call Cluster(T,Sx,Sy)
       end do
+
       do i=1,sweeps
         call Metropolis(T,Sx,Sy,AR)
         if(i>thermalization .and. mod(i,eachsweep)==0) then
@@ -74,7 +75,7 @@ contains
           k=k+1
           !write(*,*) k
           ARtot(k)=AR
-          H(k)=Hamilt(T,Sx,Sy)
+          H(k)=Hamilt(Sx,Sy)
           M2(k)=Magnet2(Sx,Sy)
         end if
       end do
@@ -99,12 +100,11 @@ contains
       allocate(Sy(L))
       call hot_start(Sx,Sy)
       !call cold_start(Sx,Sy)
-      do i=1,100
+      do i=1,10
         call Clustert(T,Sx,Sy)
-        write(*,*) Sx(1)**2+Sy(1)**2
+        write(*,*) "Is it 1?", i, Sx(1)**2+Sy(1)**2
       end do
   end subroutine test
-
 
   subroutine test2(T)
     real(dp), intent(in) :: T
@@ -118,7 +118,7 @@ contains
       do i=1,thermalization
         call Cluster(T,Sx,Sy)
         if(i==1 .or. mod(i,eachsweep)==0 ) then
-          write(10,*) i, Hamilt(T,Sx,Sy)/real(L,dp)
+          write(10,*) i, Hamilt(Sx,Sy)/real(L,dp)
         end if
       end do
     close(10)
