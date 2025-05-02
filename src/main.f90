@@ -6,7 +6,7 @@ program main
   use statistics
   implicit none
 
-  call thermalize(1.0_dp)
+  call thermalize(2.0_dp)
   !call vary_temp(0.1_dp,1._dp,30)
   !call test(0.1_dp)
 
@@ -32,8 +32,8 @@ contains
           write(10,*) i, Hamilt(Sx,Sy)/real(L,dp)
           write(20,*) i, top_charge(Sx,Sy)
         end if
-        !call Metropolis(T,Sx,Sy,AR)
-        call Cluster(T,Sx,Sy)
+        call Metropolis(T,Sx,Sy,AR)
+        !call Cluster(T,Sx,Sy)
       end do
 
       do i=1,sweeps
