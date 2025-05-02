@@ -1,0 +1,1173 @@
+
+
+*******************************************************************************
+Fri May  2 15:30:22 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=a*exp(-k*(x-mean)**2  )
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             k             mean         
+   0 3.8349887588e+04   0.00e+00  6.85e+01    1.000000e+00   1.000000e+00   1.000000e+00
+   8 1.3471692655e+01  -3.74e-01  6.85e-05    2.798591e-01   2.466772e-01  -1.022453e-02
+
+After 8 iterations the fit converged.
+final sum of squares of residuals : 13.4717
+rel. change during last iteration : -3.74175e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.29768
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.68396
+p-value of the Chisq distribution (FIT_P)              : 0.096618
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.279859         +/- 0.004401     (1.572%)
+k               = 0.246677         +/- 0.004384     (1.777%)
+mean            = -0.0102245       +/- 0.0185       (181%)
+
+correlation matrix of the fit parameters:
+                a      k      mean   
+a               1.000 
+k               0.564  1.000 
+mean            0.008  0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:45:15 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:45:39 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:46:23 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+Warning: Initial value of parameter 'mean' is zero.
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 1.7373651564e+03   0.00e+00  2.29e+01    1.000000e+00   1.000000e-30
+BREAK: Singular matrix in Invert_RtR
+
+*******************************************************************************
+Fri May  2 15:46:38 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:47:42 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:48:08 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:51:07 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 0.988623         +/- 0.005539     (0.5602%)
+mean            = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean            0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:59:50 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 15:59:50 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:00:22 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:00:22 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:00:56 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:00:56 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:01:11 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:01:11 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:01:29 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:01:29 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:01:46 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:01:46 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:02:02 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:02:02 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:02:34 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:02:34 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:03:03 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:03:03 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:04:03 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:04:03 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:07:38 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:07:38 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:08:10 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:08:10 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:09:39 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 1:2:3
+        format = x:z:s
+        #datapoints = 11
+function used for fitting: gauss(x)
+	gauss(x)=exp(-(x-mean)**2 /(2*sigma**2)  )/(sqrt(2*pi)*sigma)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma         mean         
+   0 6.0260627081e+03   0.00e+00  3.82e+01    1.000000e+00   1.000000e+00
+   5 1.3487777837e+01  -1.73e-01  3.82e-04    1.423625e+00  -1.022294e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 13.4878
+rel. change during last iteration : -1.72517e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.22419
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.49864
+p-value of the Chisq distribution (FIT_P)              : 0.141748
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma           = 1.42362          +/- 0.01189      (0.8355%)
+mean            = -0.0102229       +/- 0.01743      (170.5%)
+
+correlation matrix of the fit parameters:
+                sigma  mean   
+sigma           1.000 
+mean           -0.014  1.000 
+
+
+*******************************************************************************
+Fri May  2 16:09:39 2025
+
+
+FIT:    data read from '../data/histogram.dat' u 4:5:6
+        format = x:z:s
+        #datapoints = 9
+function used for fitting: gauss2(x)
+	gauss2(x)=exp(-(x-mean2)**2 /(2*sigma2**2)  )/(sqrt(2*pi)*sigma2)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   sigma2        mean2        
+   0 1.7413095136e+04   0.00e+00  1.15e+02    1.000000e+00   1.000000e+00
+   6 4.3183602022e+00  -3.18e-01  1.15e-04    9.886229e-01  -1.511678e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.31836
+rel. change during last iteration : -3.18406e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.785435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.616909
+p-value of the Chisq distribution (FIT_P)              : 0.742465
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+sigma2          = 0.988623         +/- 0.005539     (0.5602%)
+mean2           = -0.000151168     +/- 0.007764     (5136%)
+
+correlation matrix of the fit parameters:
+                sigma2 mean2  
+sigma2          1.000 
+mean2           0.010  1.000 

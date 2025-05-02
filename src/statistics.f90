@@ -69,9 +69,10 @@ contains
     AR=AR/real(AR_N,dp)
   end subroutine Metropolis
 
-  subroutine Cluster(T,Sx,Sy)
+  subroutine Cluster(T,Sx,Sy,x)
     real(dp), intent(in) :: T
     real(dp), dimension(L), intent(inout) :: Sx,Sy
+    real(dp), intent(out) :: x
     real(dp) rx,ry,theta,r,dh,p,p2
     real(dp) :: Sx2(L),Sy2(L)
     integer(i4) :: i,j,k1,k2
@@ -200,6 +201,7 @@ contains
         end do
       end if
     end if
+    x=real(k1,dp)
   end subroutine Cluster
 
   subroutine Clustert(T,Sx,Sy)
@@ -394,6 +396,19 @@ contains
     !call standard_error(x,y,deltay)
     call jackknife(x,y,deltay)
   end subroutine mean_scalar
+
+  subroutine histogram(x,A1,A2)
+  real(dp), intent(in) :: x
+  integer(i4), dimension(bins), intent(inout) :: A1
+  real(dp), dimension(bins), intent(in) :: A2
+  integer(i4) :: i
+  do i=1,bins
+    if(x .le. real(A2(i),dp)+binwidth/2._dp .and. x>real(A2(i),dp)-binwidth/2._dp ) then
+      A1(i)=A1(i)+1
+      cycle
+    end if
+  end do
+  end subroutine histogram
 
 
 end module statistics
