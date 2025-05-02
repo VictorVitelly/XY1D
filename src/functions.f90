@@ -17,6 +17,15 @@ contains
     end if
   end function iv
 
+  function bondage(bond)
+    integer(i4), dimension(L) :: bond
+    integer(i4) :: i,bondage
+    bondage=0
+    do i=1,L
+      bondage=bondage+bond(i)
+    end do
+  end function bondage
+
   function Hamilt(Sx,Sy)
     real(dp), dimension(:), intent(in) :: Sx,Sy
     real(dp) :: Hamilt
@@ -64,15 +73,24 @@ contains
 
   function top_charge(Sx,Sy)
     real(dp), dimension(L), intent(in) :: Sx,Sy
-    real(dp), dimension(L) :: phi(:)
-    real(dp) :: dphi
+    real(dp), dimension(L) :: phix
+    real(dp) :: dphix,dphixaux,top_charge
     integer(i4) :: i
     do i=1,L
-      phi(i)=atan2(Sy(i),Sx(i))
+      phix(i)=atan2(Sy(i),Sx(i))
     end do
+    dphix=0._dp
     do i=1,L
-      dphi=dphi+phi(iv(i+1))-phi(i)
+      dphixaux=phix(iv(i+1))-phix(i)
+      if(dphixaux>Pi) then
+        dphix=dphix+dphixaux-2._dp*Pi
+      else if(dphixaux<-Pi) then
+        dphix=dphix+dphixaux+2._dp*Pi
+      else
+        dphix=dphix+dphixaux
+      end if
     end do
+    top_charge=dphix/(2._dp*Pi)
   end function top_charge
 
 

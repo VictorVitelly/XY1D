@@ -94,6 +94,7 @@ contains
         end if
       end if
     end do
+    !write(*,*) "bound=", bond
     if(bond(L)==0) then
       k1=0
       k2=0
@@ -124,6 +125,7 @@ contains
         end do
       end if
       do i=1,k1
+        !write(*,*) clusterL(i),clusterR(i)
         call random_number(p2)
         if(p2<0.5_dp) then
           do j=clusterL(i),clusterR(i)
@@ -134,7 +136,7 @@ contains
       end do
     end if
 
-    if(bond(L)==1) then
+    if(bond(L)==1 .and. bondage(bond) < L ) then
       k1=1
       k2=1
       do i=1,L
@@ -149,6 +151,7 @@ contains
           exit
         end if
       end do
+      !write(*,*) "Aqui",clusterL(1),clusterR(1)
       do i=clusterR(1),iv(ClusterL(1)-1)
         if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
           k1=k1+1
@@ -178,6 +181,7 @@ contains
         end do
       end if
       do i=2,k1
+        !write(*,*) clusterL(i),clusterR(i)
         call random_number(p2)
         if(p2<0.5_dp) then
           do j=clusterL(i),clusterR(i)
@@ -186,6 +190,15 @@ contains
           end do
         end if
       end do
+    else if(bondage(bond) ==L ) then
+      !write(*,*) "Unique cluster"
+      call random_number(p2)
+      if(p2<0.5_dp) then
+        do i=1,L
+          Sx(i)=Sx2(i)
+          Sy(i)=Sy2(i)
+        end do
+      end if
     end if
   end subroutine Cluster
 

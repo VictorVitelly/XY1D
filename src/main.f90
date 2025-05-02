@@ -6,9 +6,9 @@ program main
   use statistics
   implicit none
 
-  call thermalize(0.5_dp)
+  call thermalize(1.0_dp)
   !call vary_temp(0.1_dp,1._dp,30)
-  !call test(0.5_dp)
+  !call test(0.1_dp)
 
 contains
 
@@ -18,7 +18,8 @@ contains
     real(dp), allocatable :: ARtot(:)
     real(dp) :: AR,AR_ave,AR_delta
     integer(i4) :: i,k
-    open(10, file = 'data/thermalization.dat', status = 'replace')
+    open(10, file = 'data/ThE.dat', status = 'replace')
+    open(20, file = 'data/ThQ.dat', status = 'replace')
       allocate(Sx(L) )
       allocate(Sy(L))
       allocate(ARtot(Nmsrs))
@@ -26,12 +27,13 @@ contains
       !call cold_start(Sx,Sy)
       k=0
       AR=0._dp
-      do i=1,thermalization
+      do i=1,2*thermalization
         if(i==1 .or. mod(i,1)==0 ) then
           write(10,*) i, Hamilt(Sx,Sy)/real(L,dp)
+          write(20,*) i, top_charge(Sx,Sy)
         end if
-        call Metropolis(T,Sx,Sy,AR)
-        !call Cluster(T,Sx,Sy)
+        !call Metropolis(T,Sx,Sy,AR)
+        call Cluster(T,Sx,Sy)
       end do
 
       do i=1,sweeps
@@ -42,7 +44,9 @@ contains
         end if
       end do
       call mean_scalar(ARtot,AR_ave,AR_delta)
-      write(*,*) AR_ave,AR_delta
+      write(*,*) "Acc. Rate=",AR_ave,AR_delta
+      close(10)
+      close(20)
       deallocate(Sx,Sy,ARtot)
   end subroutine thermalize
 
@@ -100,8 +104,8 @@ contains
       allocate(Sy(L))
       call hot_start(Sx,Sy)
       !call cold_start(Sx,Sy)
-      do i=1,10
-        call Clustert(T,Sx,Sy)
+      do i=1,2*thermalization
+        call Cluster(T,Sx,Sy)
         write(*,*) "Is it 1?", i, Sx(1)**2+Sy(1)**2
       end do
   end subroutine test
