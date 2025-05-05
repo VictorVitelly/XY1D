@@ -96,6 +96,7 @@ contains
       end if
     end do
     !write(*,*) "bound=", bond
+
     if(bond(L)==0) then
       k1=0
       k2=0
@@ -396,6 +397,30 @@ contains
     !call standard_error(x,y,deltay)
     call jackknife(x,y,deltay)
   end subroutine mean_scalar
+
+  subroutine mean_vector(x,y,deltay)
+    real(dp), dimension(L,Nmsrs), intent(in) :: x
+    real(dp), dimension(L), intent(out) :: y,deltay
+    integer(i4) :: i1
+    y=0._dp
+    deltay=0._dp
+    do i1=1,L
+      call mean_scalar(x(i1,:),y(i1),deltay(i1))
+    end do
+  end subroutine mean_vector
+
+  subroutine mean_matrix(x,y,deltay)
+    real(dp), dimension(L,L,Nmsrs), intent(in) :: x
+    real(dp), dimension(L,L), intent(out) :: y,deltay
+    integer(i4) :: i1,i2
+    y=0._dp
+    deltay=0._dp
+    do i1=1,L
+      do i2=1,L
+      call mean_scalar(x(i1,i2,:),y(i1,i2),deltay(i1,i2))
+      end do
+    end do
+  end subroutine mean_matrix
 
   subroutine histogram(x,A1,A2)
   real(dp), intent(in) :: x

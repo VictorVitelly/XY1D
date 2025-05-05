@@ -4,12 +4,18 @@ program main
   use arrays
   use functions
   use statistics
+  use measurements
   implicit none
 
+  call cpu_time(starting)
   !call thermalize(0.2_dp)
-  !call vary_temp(0.1_dp,2._dp,30)
-  call fixed_temp(0.5_dp)
+  !call vary_temp(0.1_dp,2._dp,20)
+  !call fixed_temp(0.5_dp)
   !call test(0.1_dp)
+  call correlate(0.1_dp,2.0_dp,20)
+
+  call cpu_time(ending)
+  write(*,*) "Elapsed time: ", (ending-starting), " s"
 
 contains
 
@@ -57,7 +63,7 @@ contains
     real(dp), allocatable :: Sx(:),Sy(:)
     real(dp), allocatable :: ARtot(:),H(:),M2(:),Q(:),Q2(:)
     real(dp) :: T,AR,AR_ave,AR_delta,H_ave,H_delta,M2_ave,M2_delta
-    real(dp) :: Q_ave,Q_delta,Q2_ave,Q2_delta
+    real(dp) :: Q_ave,Q_delta,Q2_ave,Q2_delta,susc_ave,susc_delta
     integer(i4) :: i,j,k
     open(10, file = 'data/accrate.dat', status = 'replace')
     open(20, file = 'data/energy.dat', status = 'replace')
@@ -96,11 +102,12 @@ contains
       call mean_scalar(M2,M2_ave,M2_delta)
       call mean_scalar(Q,Q_ave,Q_delta)
       call mean_scalar(Q2,Q2_ave,Q2_delta)
+      call top_suscep(Q,Q2,susc_ave,susc_delta)
       write(10,*) T,AR_ave,AR_delta
       write(20,*) T,H_ave/real(L,dp),H_delta/real(L,dp)
       write(30,*) T,M2_ave/real(L,dp),M2_delta/real(L,dp)
       write(40,*) T,Q_ave,Q_delta
-      write(50,*) T,Q2_ave,Q2_delta
+      write(50,*) T,Q2_ave/real(L,dp),Q2_delta/real(L,dp),susc_ave/real(L,dp),susc_delta/real(L,dp)
       deallocate(Sx,Sy,ARtot,H,M2,Q,Q2)
     end do
     close(10)
@@ -141,7 +148,6 @@ contains
       result2(i) =minn+binwidth/2._dp+real(i-1,dp)*binwidth
     end do
     result1=0
-
     call hot_start(Sx,Sy)
     !call cold_start(Sx,Sy)
     do i=1,sweeps
@@ -151,18 +157,61 @@ contains
         call histogram(Q,result1,result2)
       end if
     end do
-
     norm=0._dp
     do i=1,bins
       norm=norm+result1(i)
     end do
-    !norm=norm*4._dp/101._dp
-
     do i=1,bins
       write(10,*) result2(i), result1(i)/norm, sqrt( real(result1(i),dp) )/norm
     end do
-
     close(10)
   end subroutine fixed_temp
+
+  subroutine correlate(T0,Tf,NTs)
+  real(dp), intent(in) :: T0,Tf
+  integer(i4), intent(in) :: NTs
+  integer(i4) :: i,k,j,k2
+  real(dp) :: Sx(L),Sy(L)
+  real(dp) :: corr1(L,Nmsrs),corr2(L,L,Nmsrs),CF(L,L),CFprom(L,L)
+  real(dp), allocatable :: results(:,:),deltaresults(:,:),Q2(:)
+  real(dp) :: T,x,Q2_ave,Q2_delta
+  open(60, file = 'data/corrfunc.dat', status = 'replace')
+  open(50, file = 'data/topsuscep.dat', status = 'replace')
+    allocate(results(L,NTs) )
+    allocate(deltaresults(L,NTs) )
+    k2=0
+    do j=1,NTs
+      allocate(Q2(Nmsrs))
+      T=T0+(Tf-T0)*real(j-1,dp)/real(NTs-1,dp)
+      write(*,*) T
+      k2=k2+1
+      call hot_start(Sx,Sy)
+      call initialize2(corr1,corr2)
+      k=0
+      do i=1,sweeps
+        call Cluster(T,Sx,Sy,x)
+        if(i>thermalization .and. mod(i,eachsweep)==0) then
+          k=k+1
+          Q2(k)=top_charge(Sx,Sy)**2
+          call correlation(Sx,Sy,k,corr1,corr2)
+        end if
+      end do
+      call mean_scalar(Q2,Q2_ave,Q2_delta)
+      write(50,*) T,Q2_ave/real(L,dp),Q2_delta/real(L,dp)
+
+      call correlation_function2(corr1,corr2,CF,CFprom)
+      do i=1,L
+        results(i,k2)=CF(iv(i),1)
+        deltaresults(i,k2)=CFprom(iv(i),1)
+      end do
+      deallocate(Q2)
+    end do
+    do i=1,L
+      write(60,*) abs(i-1), results(i,:), deltaresults(i,:)
+    end do
+    close(50)
+    close(60)
+    deallocate(results,deltaresults)
+  end subroutine correlate
 
 end program main
