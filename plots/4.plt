@@ -36,8 +36,8 @@ array TTT[21]
 do for [i=1:10] {
     TTT[i]=0.1+1.9*(i-1)/19.
     column1[i]=i+1
-    column2[i]=i+21
-    fit g(x,ta,tb) '../data/corrfunc.dat' using 1:column1[i]:column2[i] via ta, tb
+    column2[i]=i+11
+    fit g(x,ta,tb) '../data/corrfunc.dat' using 1:column1[i]:column2[i] every ::1::48 via ta, tb
     tmpA[i]=ta
     tmpB[i]=tb
     tmpAerr[i]=ta_err
@@ -46,6 +46,6 @@ do for [i=1:10] {
 }
 
 
-plot for [i=1:10] '../data/corrfunc.dat' using 1:column1[i]:column2[i] w errorbars linestyle i notitle ,for [i=1:10] g(x,tmpA[i],tmpB[i]) linestyle i title sprintf("T=%.2f, ξ=%.3f±%.3f, χ/dof=%.2f",TTT[i],tmpB[i],tmpBerr[i],chi2[i])
+plot for [i=1:10] '../data/corrfunc.dat' using 1:column1[i]:column2[i] w errorbars linestyle i notitle ,for [i=1:10] g(x,tmpA[i],tmpB[i]) linestyle i title sprintf("T=%.2f, ξ=%.3f±%.3f, χ^2/dof=%.2f",TTT[i],tmpB[i],tmpBerr[i],chi2[i])
 
 pause -1

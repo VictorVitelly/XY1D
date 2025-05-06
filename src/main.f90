@@ -12,7 +12,7 @@ program main
   !call vary_temp(0.1_dp,2._dp,20)
   !call fixed_temp(0.5_dp)
   !call test(0.1_dp)
-  call correlate(0.1_dp,2.0_dp,20)
+  call correlate(0.1_dp,1.0_dp,10)
 
   call cpu_time(ending)
   write(*,*) "Elapsed time: ", (ending-starting), " s"
