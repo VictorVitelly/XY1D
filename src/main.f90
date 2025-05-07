@@ -9,10 +9,10 @@ program main
 
   call cpu_time(starting)
   !call thermalize(0.2_dp)
-  !call vary_temp(0.1_dp,2._dp,20)
+  call vary_temp(0.1_dp,2._dp,20)
   !call fixed_temp(0.5_dp)
   !call test(0.1_dp)
-  call correlate(0.1_dp,1.0_dp,10)
+  !call correlate(0.1_dp,1.0_dp,10)
 
   call cpu_time(ending)
   write(*,*) "Elapsed time: ", (ending-starting), " s"
@@ -61,15 +61,17 @@ contains
     real(dp), intent(in) :: Ti,Tf
     integer(i4), intent(in) :: Nms
     real(dp), allocatable :: Sx(:),Sy(:)
-    real(dp), allocatable :: ARtot(:),H(:),M2(:),Q(:),Q2(:)
+    real(dp), allocatable :: ARtot(:),H(:),M2(:),Q(:),Q2(:),Q4(:)
     real(dp) :: T,AR,AR_ave,AR_delta,H_ave,H_delta,M2_ave,M2_delta
     real(dp) :: Q_ave,Q_delta,Q2_ave,Q2_delta,susc_ave,susc_delta
+    real(dp) :: Q4_ave,Q4_delta,c4,c4_delta
     integer(i4) :: i,j,k
     open(10, file = 'data/accrate.dat', status = 'replace')
     open(20, file = 'data/energy.dat', status = 'replace')
     open(30, file = 'data/magnet2.dat', status = 'replace')
     open(40, file = 'data/topcharge.dat', status = 'replace')
     open(50, file = 'data/topcharge2.dat', status = 'replace')
+    open(60, file = 'data/c4.dat', status = 'replace')
     do j=1,Nms
       dtheta=Pi*(0.1_dp+0.5_dp*real(j-1,dp)/real(Nms-1,dp))
       T=Ti+(Tf-Ti)*real(j-1,dp)/real(Nms-1,dp)
@@ -80,6 +82,7 @@ contains
       allocate(M2(Nmsrs))
       allocate(Q(Nmsrs))
       allocate(Q2(Nmsrs))
+      allocate(Q4(Nmsrs))
       call hot_start(Sx,Sy)
       !call cold_start(Sx,Sy)
       k=0
@@ -95,6 +98,7 @@ contains
           M2(k)=Magnet2(Sx,Sy)
           Q(k)=top_charge(Sx,Sy)
           Q2(k)=Q(k)**2
+          Q4(k)=Q(k)**4
         end if
       end do
       call mean_scalar(ARtot,AR_ave,AR_delta)
@@ -102,13 +106,17 @@ contains
       call mean_scalar(M2,M2_ave,M2_delta)
       call mean_scalar(Q,Q_ave,Q_delta)
       call mean_scalar(Q2,Q2_ave,Q2_delta)
+      call mean_scalar(Q4,Q4_ave,Q4_delta)
       call top_suscep(Q,Q2,susc_ave,susc_delta)
       write(10,*) T,AR_ave,AR_delta
       write(20,*) T,H_ave/real(L,dp),H_delta/real(L,dp)
       write(30,*) T,M2_ave/real(L,dp),M2_delta/real(L,dp)
       write(40,*) T,Q_ave,Q_delta
       write(50,*) T,Q2_ave/real(L,dp),Q2_delta/real(L,dp),susc_ave/real(L,dp),susc_delta/real(L,dp)
-      deallocate(Sx,Sy,ARtot,H,M2,Q,Q2)
+      c4=(3._dp*(Q2_ave**2)-Q4_ave)/real(L,dp)
+      c4_delta=sqrt((6._dp*(Q2_ave*Q2_delta)**2+Q4_delta**2)/real(L,dp))
+      write(60,*) T,c4, c4_delta
+      deallocate(Sx,Sy,ARtot,H,M2,Q,Q2,Q4)
     end do
     close(10)
     close(20)

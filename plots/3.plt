@@ -1,7 +1,9 @@
-set terminal qt size 1300, 900
-set lmargin 16
-set ylabel 'Freq.' font ',16' rotate by 0
+set terminal qt size 1700, 900
+set lmargin 18
+set ylabel 'Freq.' font ',16' rotate by 0 offset -4,0
 set key font ',16'
+set xtics font ',14'
+set ytics font ',14'
 binwidth=1.
 bin(x,width)=width*floor(x/width)
 set boxwidth binwidth

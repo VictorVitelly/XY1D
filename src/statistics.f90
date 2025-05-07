@@ -202,7 +202,11 @@ contains
         end do
       end if
     end if
-    x=real(k1,dp)
+    x=0._dp
+    do i=1,k1
+      x=x+clusterR(i)+1._dp-clusterL(i)
+    end do
+    x=x/real(k1,dp)
   end subroutine Cluster
 
   subroutine Clustert(T,Sx,Sy)
