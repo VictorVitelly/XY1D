@@ -38,82 +38,55 @@ contains
       susc_delta=Sqrt(real(Mbins-1,dp)*jackk/real(Mbins,dp))
   end subroutine top_suscep
 
-  subroutine initialize2(corr1,corr2)
+  subroutine initialize(corr1,corr2)
     real(dp), dimension(L,Nmsrs), intent(inout) :: corr1
-    real(dp), dimension(L,L,Nmsrs), intent(inout) :: corr2
+    real(dp), dimension(L,Nmsrs), intent(inout) :: corr2
       corr1=0._dp
       corr2=0._dp
-  end subroutine initialize2
+  end subroutine initialize
 
  subroutine correlation(Sx,Sy,k,corr1,corr2)
     real(dp), dimension(L), intent(in) :: Sx,Sy
     integer(i4), intent(in) :: k
     real(dp), dimension(L,Nmsrs), intent(inout) :: corr1
-    real(dp), dimension(L,L,Nmsrs), intent(inout) :: corr2
-    integer(i4) :: i1,i2
+    real(dp), dimension(L,Nmsrs), intent(inout) :: corr2
+    integer(i4) :: i1
     do i1=1,L
       corr1(i1,k)=Sx(i1)
-      do i2=1,L
-        corr2(i1,i2,k)=Sx(i1)*Sx(i2)+Sy(i1)*Sy(i2)
-      end do
+      corr2(i1,k)=Sx(i1)*Sx(1)+Sy(i1)*Sy(1)
     end do
   end subroutine correlation
 
   subroutine correlation_function(corr1,corr2,CF,CFprom)
     real(dp), dimension(L,Nmsrs), intent(in) :: corr1
-    real(dp), dimension(L,L,Nmsrs), intent(in) :: corr2
-    real(dp), dimension(L,L), intent(out) :: CF,CFprom
-    real(dp), dimension(L) :: corr1prom,corr1delta
-    real(dp), dimension(L,L) :: corr2prom,corr2delta
-    integer(i4) :: i1,i2
-    corr1prom=0._dp
-    corr2prom=0._dp
-    corr1delta=0._dp
-    corr2delta=0._dp
-    call mean_vector(corr1,corr1prom,corr1delta)
-    call mean_matrix(corr2,corr2prom,corr2delta)
-    do i1=1,L
-      do i2=1,L
-        CF(i1,i2)=corr2prom(i1,i2)!-corr1prom(i1)*corr1prom(i2)
-        CFprom(i1,i2)=corr2delta(i1,i2)
-        !CFprom(i1,i2)=Sqrt((corr2delta(i1,i2))**2+(corr1prom(i1)*corr1delta(i2))**2 +(corr1prom(i2)*corr1delta(i1) )**2)
-      end do
-    end do
-  end subroutine correlation_function
-
-  subroutine correlation_function2(corr1,corr2,CF,CFprom)
-    real(dp), dimension(L,Nmsrs), intent(in) :: corr1
-    real(dp), dimension(L,L,Nmsrs), intent(in) :: corr2
-    real(dp), dimension(L,L), intent(out) :: CF,CFprom
-    real(dp), dimension(L,L):: jackk
+    real(dp), dimension(L,Nmsrs), intent(in) :: corr2
+    real(dp), dimension(L), intent(out) :: CF,CFprom
+    real(dp), dimension(L):: jackk
     real(dp) :: corr1m(L,Mbins)
-    real(dp) :: corr2m(L,L,Mbins),CFm(L,L,Mbins)
+    real(dp) :: corr2m(L,Mbins),CFm(L,Mbins)
     real(dp), dimension(L) :: corr1prom,corr1delta
-    real(dp), dimension(L,L) :: corr2prom,corr2delta
+    real(dp), dimension(L) :: corr2prom,corr2delta
     integer(i4) :: i1,i2,i3
     corr1prom=0._dp
     corr2prom=0._dp
     corr1delta=0._dp
     corr2delta=0._dp
     call mean_vector(corr1,corr1prom,corr1delta)
-    call mean_matrix(corr2,corr2prom,corr2delta)
+    call mean_vector(corr2,corr2prom,corr2delta)
     do i1=1,L
-      do i2=1,L
-        CF(i1,i2)=corr2prom(i1,i2)-2._dp*corr1prom(i1)*corr1prom(i2)
-        !CFprom(i1,i2)=Sqrt((corr2delta(i1,i2))**2+(corr1prom(i1)*corr1delta(i2))**2 +(corr1prom(i2)*corr1delta(i1) )**2)
-      end do
+      CF(i1)=corr2prom(i1)-2._dp*corr1prom(i1)*corr1prom(1)
     end do
     jackk=0._dp
     do i1=1,Mbins
     corr1m(:,i1)=0._dp
-    corr2m(:,:,i1)=0._dp
+    corr2m(:,i1)=0._dp
       do i2=1,Nmsrs
         if(i2 .le. (i1-1)*Nmsrs/Mbins) then
           corr1m(:,i1)=corr1m(:,i1)+corr1(:,i2)
-          corr2m(:,:,i1)=corr2m(:,:,i1)+corr2(:,:,i2)
+          corr2m(:,i1)=corr2m(:,i1)+corr2(:,i2)
         else if(i2 > i1*Nmsrs/Mbins) then
           corr1m(:,i1)=corr1m(:,i1)+corr1(:,i2)
-          corr2m(:,:,i1)=corr2m(:,:,i1)+corr2(:,:,i2)
+          corr2m(:,i1)=corr2m(:,i1)+corr2(:,i2)
         end if
       end do
     end do
@@ -121,15 +94,14 @@ contains
     corr2m=corr2m/(real(Nmsrs,dp) -real(Nmsrs/Mbins,dp))
     do i3=1,Mbins
       do i1=1,L
-        do i2=1,L
-          CFm(i1,i2,i3)=corr2m(i1,i2,i3)-2._dp*corr1m(i1,i3)*corr1m(i2,i3)
-        end do
+        CFm(i1,i3)=corr2m(i1,i3)-2._dp*corr1m(i1,i3)*corr1m(1,i3)
       end do
     end do
     do i1=1,Mbins
-      jackk(:,:)=jackk(:,:)+(CF(:,:)-CFm(:,:,i1) )**2
+      jackk(:)=jackk(:)+(CF(:)-CFm(:,i1) )**2
     end do
-    CFprom(:,:)=Sqrt(real(Mbins-1,dp)*jackk(:,:)/real(Mbins,dp))
-  end subroutine correlation_function2
+    CFprom(:)=Sqrt(real(Mbins-1,dp)*jackk(:)/real(Mbins,dp))
+  end subroutine correlation_function
+
 
 end module measurements

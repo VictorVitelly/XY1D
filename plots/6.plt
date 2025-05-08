@@ -47,6 +47,6 @@ do for [i=1:10] {
 }
 
 
-plot for [i=7:7] '../data/corrfunc.dat' using 1:column1[i]:column2[i] w errorbars linestyle i notitle ,for [i=7:7] g(x,tmpA[i],tmpB[i]) linestyle i title sprintf("T=%.2f, ξ=%.3f±%.3f, χ^2/dof=%.2f",TTT[i],tmpB[i],tmpBerr[i],chi2[i])
+plot for [i=1:10] '../data/corrfunc.dat' using 1:column1[i]:column2[i] w errorbars linestyle i notitle ,for [i=1:10] g(x,tmpA[i],tmpB[i]) linestyle i title sprintf("T=%.2f, ξ=%.3f±%.3f, χ^2/dof=%.2f",TTT[i],tmpB[i],tmpBerr[i],chi2[i])
 
 pause -1

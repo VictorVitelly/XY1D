@@ -180,7 +180,7 @@ contains
   integer(i4), intent(in) :: NTs
   integer(i4) :: i,k,j,k2
   real(dp) :: Sx(L),Sy(L)
-  real(dp) :: corr1(L,Nmsrs),corr2(L,L,Nmsrs),CF(L,L),CFprom(L,L)
+  real(dp) :: corr1(L,Nmsrs),corr2(L,Nmsrs),CF(L),CFprom(L)
   real(dp), allocatable :: results(:,:),deltaresults(:,:),Q2(:)
   real(dp) :: T,x,Q2_ave,Q2_delta
   open(60, file = 'data/corrfunc.dat', status = 'replace')
@@ -194,7 +194,7 @@ contains
       write(*,*) T
       k2=k2+1
       call hot_start(Sx,Sy)
-      call initialize2(corr1,corr2)
+      call initialize(corr1,corr2)
       k=0
       do i=1,sweeps
         call Cluster(T,Sx,Sy,x)
@@ -207,10 +207,10 @@ contains
       call mean_scalar(Q2,Q2_ave,Q2_delta)
       write(50,*) T,Q2_ave/real(L,dp),Q2_delta/real(L,dp)
 
-      call correlation_function2(corr1,corr2,CF,CFprom)
+      call correlation_function(corr1,corr2,CF,CFprom)
       do i=1,L
-        results(i,k2)=CF(iv(i),1)
-        deltaresults(i,k2)=CFprom(iv(i),1)
+        results(i,k2)=CF(iv(i))
+        deltaresults(i,k2)=CFprom(iv(i))
       end do
       deallocate(Q2)
     end do
