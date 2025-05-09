@@ -69,21 +69,24 @@ contains
     AR=AR/real(AR_N,dp)
   end subroutine Metropolis
 
-  subroutine Cluster(T,Sx,Sy,x)
+  subroutine Cluster(T,Sx,Sy,y)
     real(dp), intent(in) :: T
     real(dp), dimension(L), intent(inout) :: Sx,Sy
-    real(dp), intent(out) :: x
-    real(dp) rx,ry,theta,r,dh,p,p2
+    real(dp), intent(out) :: y
+    real(dp) rx,ry,theta,r,dh,p,p2,rps,x
     real(dp) :: Sx2(L),Sy2(L)
-    integer(i4) :: i,j,k1,k2
-    integer(i4) :: bond(L),clusterL(L),clusterR(L),clusterRaux(L)
+    integer(i4) :: i,j,k1,k2,bdsm
+    integer(i4) :: bond(L),clusterL(L),clusterR(L)!,clusterRaux(L)
     call random_real(theta,Pi)
+    x=0._dp
+    y=0._dp
     rx=cos(theta)
     ry=sin(theta)
     bond=0
     do i=1,L
-      Sx2(i)=Sx(i)-2._dp*rx*(Sx(i)*rx+Sy(i)*ry )
-      Sy2(i)=Sy(i)-2._dp*ry*(Sx(i)*rx+Sy(i)*ry )
+      rps=-2._dp*(Sx(i)*rx+Sy(i)*ry )
+      Sx2(i)=Sx(i)+rx*(rps)
+      Sy2(i)=Sy(i)+ry*(rps)
     end do
     do i=1,L
       dh=Deltah(Sx,Sy,i,Sx2(iv(i+1)),Sy2(iv(i+1)))
@@ -96,6 +99,7 @@ contains
       end if
     end do
     !write(*,*) "bound=", bond
+    bdsm=bondage(bond)
 
     if(bond(L)==0) then
       k1=0
@@ -117,15 +121,15 @@ contains
           clusterR(k1)=i
         end if
       end do
-      if(clusterL(1)>clusterR(1) ) then
-        do i=1,k2-1
-          clusterRaux(i)=clusterR(i+1)
-        end do
-        clusterRaux(k2)=clusterR(1)
-        do i=1,k2
-          clusterR(i)=clusterRaux(i)
-        end do
-      end if
+      !if(clusterL(1)>clusterR(1) ) then
+      !  do i=1,k2-1
+      !    clusterRaux(i)=clusterR(i+1)
+      !  end do
+      !  clusterRaux(k2)=clusterR(1)
+      !  do i=1,k2
+      !    clusterR(i)=clusterRaux(i)
+      !  end do
+      !end if
       do i=1,k1
         !write(*,*) clusterL(i),clusterR(i)
         call random_number(p2)
@@ -135,10 +139,12 @@ contains
             Sy(j)=Sy2(j)
           end do
         end if
+        x=x+real(clusterR(i),dp)-real(clusterL(i),dp)
       end do
+      y=x/real(k1,dp)
     end if
 
-    if(bond(L)==1 .and. bondage(bond) < L ) then
+   if(bond(L)==1 .and. bdsm < L ) then
       k1=1
       k2=1
       do i=1,L
@@ -182,6 +188,7 @@ contains
           Sy(i)=Sy2(i)
         end do
       end if
+      x=real(L-clusterL(1)+clusterR(1)-1,dp)
       do i=2,k1
         !write(*,*) clusterL(i),clusterR(i)
         call random_number(p2)
@@ -191,8 +198,10 @@ contains
             Sy(j)=Sy2(j)
           end do
         end if
+        x=x+real(clusterR(i),dp)-real(clusterL(i),dp)
       end do
-    else if(bondage(bond) ==L ) then
+      y=x/real(k1,dp)
+    else if(bdsm ==L ) then
       !write(*,*) "Unique cluster"
       call random_number(p2)
       if(p2<0.5_dp) then
@@ -201,144 +210,9 @@ contains
           Sy(i)=Sy2(i)
         end do
       end if
+      y=real(L,dp)
     end if
-    x=0._dp
-    do i=1,k1
-      x=x+clusterR(i)+1._dp-clusterL(i)
-    end do
-    x=x/real(k1,dp)
   end subroutine Cluster
-
-  subroutine Clustert(T,Sx,Sy)
-    real(dp), intent(in) :: T
-    real(dp), dimension(L), intent(inout) :: Sx,Sy
-    real(dp) rx,ry,theta,r,dh,p,p2
-    real(dp) :: Sx2(L),Sy2(L)
-    integer(i4) :: i,j,k1,k2
-    integer(i4) :: bond(L),clusterL(L),clusterR(L),clusterRaux(L)
-    call random_real(theta,Pi)
-    rx=cos(theta)
-    ry=sin(theta)
-    bond=0
-    do i=1,L
-      Sx2(i)=Sx(i)-2._dp*rx*(Sx(i)*rx+Sy(i)*ry )
-      Sy2(i)=Sy(i)-2._dp*ry*(Sx(i)*rx+Sy(i)*ry )
-    end do
-    do i=1,L
-      dh=Deltah(Sx,Sy,i,Sx2(iv(i+1)),Sy2(iv(i+1)))
-      if(dh > 0) then
-        call random_number(r)
-        p=1._dp-Exp(-dh/T)
-        if(r<p) then
-          bond(i)=1
-        end if
-      end if
-    end do
-    write(*,*) "bound=", bond
-    if(bond(L)==0) then
-      k1=0
-      k2=0
-      do i=1,L
-        if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
-          k1=k1+1
-          clusterL(k1)=i
-        end if
-        if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
-          k2=k2+1
-          clusterR(k2)=i+1
-        end if
-      end do
-      if(k1.ne.k2) then
-        write(*,*) "WARNING HERE!"
-      end if
-      do i=1,L
-        if(bond(i)==0 .and. bond(iv(i-1))==0 ) then
-          k1=k1+1
-          clusterL(k1)=i
-          clusterR(k1)=i
-        end if
-      end do
-      if(clusterL(1)>clusterR(1) ) then
-        do i=1,k2-1
-          clusterRaux(i)=clusterR(i+1)
-        end do
-        clusterRaux(k2)=clusterR(1)
-        do i=1,k2
-          clusterR(i)=clusterRaux(i)
-        end do
-      end if
-      do i=1,k1
-        write(*,*) clusterL(i),clusterR(i)
-        call random_number(p2)
-        if(p2<0.5_dp) then
-          do j=clusterL(i),clusterR(i)
-            Sx(j)=Sx2(j)
-            Sy(j)=Sy2(j)
-          end do
-        end if
-      end do
-    end if
-
-    if(bond(L)==1) then
-      k1=1
-      k2=1
-      do i=1,L
-        if(bond(i)==0) then
-          clusterR(1)=i
-          exit
-        end if
-      end do
-      do i=1,L
-        if(bond(iv(L-i))==0) then
-          clusterL(1)=L-i+1
-          exit
-        end if
-      end do
-      write(*,*) "Aqui",clusterL(1),clusterR(1)
-      do i=clusterR(1),iv(ClusterL(1)-1)
-        if(bond(iv(i-1))==0 .and. bond(i)==1 ) then
-          k1=k1+1
-          clusterL(k1)=i
-        end if
-        if(bond(iv(i+1))==0 .and. bond(i)==1 ) then
-          k2=k2+1
-          clusterR(k2)=iv(i+1)
-        end if
-      end do
-      if(k1.ne.k2) then
-        write(*,*) "WARNING SHIT!"
-      end if
-      do i=2,L-1
-        if(bond(i)==0 .and. bond(i-1)==0 ) then
-          k1=k1+1
-          clusterL(k1)=i
-          clusterR(k1)=i
-        end if
-      end do
-      call random_number(p2)
-      write(*,*) "Aqui otra vez",clusterL(1),clusterR(1)
-      if(p2<0.5_dp) then
-        do i=clusterL(1),L
-          Sx(i)=Sx2(i)
-          Sy(i)=Sy2(i)
-        end do
-        do i=1,clusterR(1)
-          Sx(i)=Sx2(i)
-          Sy(i)=Sy2(i)
-        end do
-      end if
-      do i=2,k1
-        write(*,*) clusterL(i),clusterR(i)
-        call random_number(p2)
-        if(p2<0.5_dp) then
-          do j=clusterL(i),clusterR(i)
-            Sx(j)=Sx2(j)
-            Sy(j)=Sy2(j)
-          end do
-        end if
-      end do
-    end if
-  end subroutine Clustert
 
    subroutine mean_0(x,y)
     real(dp), dimension(Nmsrs), intent(in) :: x
