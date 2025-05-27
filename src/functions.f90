@@ -5,6 +5,7 @@ module functions
 
 contains
 
+  !This function implements periodic boundary conditions
   function iv(i)
     integer(i4), intent(in) :: i
     integer(i4) :: iv
@@ -71,6 +72,7 @@ contains
     Magnet2=(a**2+b**2)/real(Narr,dp)
   end function Magnet2
 
+  !Top. charge of a configuration
   function top_charge(Sx,Sy)
     real(dp), dimension(L), intent(in) :: Sx,Sy
     real(dp), dimension(L) :: phix

@@ -7,11 +7,22 @@ program main
   use measurements
   implicit none
 
+  !To measure computing time
   call cpu_time(starting)
-  !call thermalize(0.2_dp)
-  !call vary_temp(0.1_dp,2._dp,20)
-  !call fixed_temp(0.5_dp)
-  !call test(0.1_dp)
+
+  !Four different subroutines to measure the relevant observables
+
+  !This measures the thermalization of energy and topological charge
+  call thermalize(0.2_dp)
+
+  !This measures in an interval of temperatures, the acc. rate, energy,
+  !squared magentization, top. charge, squared top. charge and c4
+  call vary_temp(0.1_dp,2._dp,20)
+
+  !This generates a histogram of the top. charge at a fixed temperature
+  call fixed_temp(0.5_dp)
+
+  !This measures the correlation functions in an interval of temperatures
   call correlate(0.1_dp,1.0_dp,10)
 
   call cpu_time(ending)
@@ -124,21 +135,6 @@ contains
     close(40)
     close(50)
   end subroutine vary_temp
-
-  subroutine test(T)
-    real(dp), intent(in) :: T
-    real(dp), allocatable :: Sx(:),Sy(:)
-    real(dp) :: x
-    integer(i4) :: i
-      allocate(Sx(L) )
-      allocate(Sy(L))
-      call hot_start(Sx,Sy)
-      !call cold_start(Sx,Sy)
-      do i=1,10
-        call Cluster(T,Sx,Sy,x)
-        write(*,*) "Is it 1?", i, Sx(1)**2+Sy(1)**2
-      end do
-  end subroutine test
 
   subroutine fixed_temp(T)
     real(dp), intent(in) :: T

@@ -6,6 +6,7 @@ module statistics
 
 contains
 
+  !subroutine to generate a random number between bound and -bound
   subroutine random_real(x,bound)
     real(dp),intent(out) :: x
     real(dp), intent(in) :: bound
@@ -34,6 +35,7 @@ contains
     end do
   end subroutine hot_start
 
+  !Metropolis algorithm
   subroutine Metropolis(T,Sx,Sy,AR)
     real(dp), intent(in) :: T
     real(dp), dimension(:), intent(inout) :: Sx,Sy
@@ -69,6 +71,7 @@ contains
     AR=AR/real(AR_N,dp)
   end subroutine Metropolis
 
+  !Cluster algorithm
   subroutine Cluster(T,Sx,Sy,y)
     real(dp), intent(in) :: T
     real(dp), dimension(L), intent(inout) :: Sx,Sy
@@ -213,6 +216,8 @@ contains
       y=real(L,dp)
     end if
   end subroutine Cluster
+
+  !Mean and error subroutines
 
    subroutine mean_0(x,y)
     real(dp), dimension(Nmsrs), intent(in) :: x
