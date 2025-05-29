@@ -13,17 +13,17 @@ program main
   !Four different subroutines to measure the relevant observables
 
   !This measures the thermalization of energy and topological charge
-  call thermalize(0.2_dp)
+  !call thermalize(0.2_dp)
 
   !This measures in an interval of temperatures, the acc. rate, energy,
   !squared magentization, top. charge, squared top. charge and c4
-  call vary_temp(0.1_dp,2._dp,20)
+  !call vary_temp(0.1_dp,2._dp,20)
 
   !This generates a histogram of the top. charge at a fixed temperature
   call fixed_temp(0.5_dp)
 
   !This measures the correlation functions in an interval of temperatures
-  call correlate(0.1_dp,1.0_dp,10)
+  !call correlate(0.1_dp,1.0_dp,10)
 
   call cpu_time(ending)
   write(*,*) "Elapsed time: ", (ending-starting), " s"

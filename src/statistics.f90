@@ -78,7 +78,7 @@ contains
     real(dp), intent(out) :: y
     real(dp) rx,ry,theta,r,dh,p,p2,rps,x
     real(dp) :: Sx2(L),Sy2(L)
-    integer(i4) :: i,j,k1,k2,bdsm
+    integer(i4) :: i,j,k1,k2,bds
     integer(i4) :: bond(L),clusterL(L),clusterR(L)!,clusterRaux(L)
     call random_real(theta,Pi)
     x=0._dp
@@ -102,7 +102,7 @@ contains
       end if
     end do
     !write(*,*) "bound=", bond
-    bdsm=bondage(bond)
+    bds=bondage(bond)
 
     if(bond(L)==0) then
       k1=0
@@ -147,7 +147,7 @@ contains
       y=x/real(k1,dp)
     end if
 
-   if(bond(L)==1 .and. bdsm < L ) then
+   if(bond(L)==1 .and. bds < L ) then
       k1=1
       k2=1
       do i=1,L
@@ -204,7 +204,7 @@ contains
         x=x+real(clusterR(i),dp)-real(clusterL(i),dp)
       end do
       y=x/real(k1,dp)
-    else if(bdsm ==L ) then
+    else if(bds ==L ) then
       !write(*,*) "Unique cluster"
       call random_number(p2)
       if(p2<0.5_dp) then
